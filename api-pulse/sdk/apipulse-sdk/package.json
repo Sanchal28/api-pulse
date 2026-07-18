@@ -1,0 +1,7 @@
+{
+  "name": "apipulse-sdk",
+  "version": "1.0.0",
+  "description": "Drop-in incoming + outgoing API monitoring for Express apps — API Pulse.",
+  "main": "index.js",
+  "license": "MIT"
+}
