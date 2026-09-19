@@ -316,6 +316,46 @@ tbody tr:hover { background: var(--surface-alt); }
 
 .feed-scroll { max-height: 420px; overflow-y: auto; }
 
+/* traffic/latency chart panel */
+.chart-legend {
+  display: flex;
+  gap: 18px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+.chart-legend span { display: flex; align-items: center; gap: 6px; }
+.chart-legend i { width: 12px; height: 2px; display: inline-block; border-radius: 2px; }
+
+.chart-body { padding: 14px 18px; }
+.chart-body svg { width: 100%; height: 160px; display: block; }
+
+.status-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--surface-alt);
+  margin-bottom: 10px;
+}
+.status-bar .seg.s2xx { background: var(--success); }
+.status-bar .seg.s4xx { background: var(--warning); }
+.status-bar .seg.s5xx { background: var(--critical); }
+
+.status-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.status-legend span { display: flex; align-items: center; gap: 6px; }
+.status-legend i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.status-legend i.s2xx { background: var(--success); }
+.status-legend i.s4xx { background: var(--warning); }
+.status-legend i.s5xx { background: var(--critical); }
+
 .badge {
   display: inline-block;
   padding: 2px 8px;

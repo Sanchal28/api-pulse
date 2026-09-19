@@ -61,6 +61,23 @@
         </div>
       </div>
 
+      <div class="panel chart-panel" style="margin-bottom:18px;">
+        <div class="panel-head">
+          <h3>Traffic &amp; Latency <span style="font-weight:400;color:var(--text-faint);">— last ~6 min</span></h3>
+          <div class="chart-legend">
+            <span><i style="background:#5EEAD4;"></i> Calls / bucket</span>
+            <span><i style="background:#FBBF24;border-radius:0;height:0;border-top:2px dashed #FBBF24;"></i> Avg latency</span>
+          </div>
+        </div>
+        <div class="chart-body">
+          <svg id="trafficChart" viewBox="0 0 760 160" preserveAspectRatio="none"></svg>
+          <div class="empty-panel" id="chartEmpty" style="display:none;">Not enough traffic yet to chart.</div>
+        </div>
+        <div class="chart-body" style="border-top:1px solid var(--border);padding-top:12px;">
+          <div id="statusBreakdown"></div>
+        </div>
+      </div>
+
       <div class="main-grid">
         <div class="panel">
           <div class="panel-head">
