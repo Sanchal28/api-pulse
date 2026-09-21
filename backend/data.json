@@ -1,0 +1,254 @@
+{
+  "users": [
+    {
+      "id": "usr_e0f206b0fe68841b",
+      "email": "sanchalwork28@gmail.com",
+      "passwordHash": "$2a$10$6rbztKRybpx2ch3UzRV66.gN2jR2m6FZ378wbNJIlB9GaWpx1I3q6",
+      "createdAt": 1786356377960
+    },
+    {
+      "id": "usr_704281b6d7b4ebd4",
+      "email": "demo@gmail.com",
+      "passwordHash": "$2a$10$OVsHGgF./O2wc484j7kT7OsDhx14xeSgig28VSnn29vLpMXydzTuO",
+      "createdAt": 1789454701879
+    },
+    {
+      "id": "usr_d9022d7a2046ad18",
+      "email": "seminar.demo@example.com",
+      "passwordHash": "$2a$10$TUblXqoqjT5Xbu.hKzMIhuYvdiUp7S5can/lpk.5tmgVGaYrw3VRe",
+      "createdAt": 1789455982536
+    },
+    {
+      "id": "usr_01ceb90cd668a6ea",
+      "email": "sanchalcr7@gmail.com",
+      "passwordHash": "$2a$10$03gj8qmL3TgEhaC5hHSeB.9yqxvWR/5oRu4vbgfKeCu.ys5d1xNp.",
+      "createdAt": 1789538368917
+    },
+    {
+      "id": "usr_b0bae7ec4d408f2e",
+      "email": "progress@123",
+      "passwordHash": "$2a$10$x0RDhprUBEKhmTKDdIjUcOCCd28QAFtNaLT8Lq8/eEHj7IOxGq/QW",
+      "createdAt": 1789539366755
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj_da8bb17bf3c26561",
+      "userId": "usr_f1b35b6e0288d773",
+      "name": "demo",
+      "projectKey": "pk_live_e77857cb8d60c51bc8092b4f",
+      "createdAt": 1784187818190
+    },
+    {
+      "id": "proj_de13efd885672aee",
+      "userId": "usr_e0f206b0fe68841b",
+      "name": "XYZ",
+      "projectKey": "pk_live_6543fb79307d4ba367eb4370",
+      "createdAt": 1786356389436
+    },
+    {
+      "id": "proj_f37487ea92e960f6",
+      "userId": "usr_704281b6d7b4ebd4",
+      "name": "backend demo",
+      "projectKey": "pk_live_8ee971f6ac9120ec68fa03b4",
+      "createdAt": 1789454713277
+    },
+    {
+      "id": "proj_d7a53221ba0a5f24",
+      "userId": "usr_d9022d7a2046ad18",
+      "name": "API Pulse Demo",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "createdAt": 1789455982571
+    },
+    {
+      "id": "proj_1e7fe8b937495423",
+      "userId": "usr_01ceb90cd668a6ea",
+      "name": "progress seminar",
+      "projectKey": "pk_live_8ac6b3facd08af30203ca117",
+      "createdAt": 1789538379578
+    },
+    {
+      "id": "proj_4d1df37a6c5a6e90",
+      "userId": "usr_b0bae7ec4d408f2e",
+      "name": "Progress",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "createdAt": 1789539379351
+    }
+  ],
+  "events": [
+    {
+      "id": "evt_6f7206564b7045b6",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "type": "incoming",
+      "api": "/api/orders",
+      "method": "POST",
+      "duration": 145,
+      "status": 201,
+      "responseSize": 684,
+      "timestamp": 1789455982579
+    },
+    {
+      "id": "evt_60a3dbe70b5960e2",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "type": "outgoing",
+      "api": "https://payments.example.com/charge",
+      "method": "POST",
+      "duration": 1280,
+      "status": 200,
+      "responseSize": 1240,
+      "timestamp": 1789455982584
+    },
+    {
+      "id": "evt_f0116e38dd0e975b",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "type": "outgoing",
+      "api": "http://legacy.example.com/profile",
+      "method": "GET",
+      "duration": 880,
+      "status": 200,
+      "responseSize": 2200,
+      "timestamp": 1789455982587
+    },
+    {
+      "id": "evt_a180f1db4968a47b",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "type": "incoming",
+      "api": "/api/login",
+      "method": "POST",
+      "duration": 95,
+      "status": 401,
+      "responseSize": 190,
+      "timestamp": 1789455982591
+    },
+    {
+      "id": "evt_8e750d58c4a8f478",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "type": "incoming",
+      "api": "/api/login",
+      "method": "POST",
+      "duration": 105,
+      "status": 401,
+      "responseSize": 190,
+      "timestamp": 1789455982594
+    },
+    {
+      "id": "evt_f684e1f56df33137",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "type": "outgoing",
+      "api": "https://inventory.example.com/stock",
+      "method": "GET",
+      "duration": 420,
+      "status": 503,
+      "responseSize": 310,
+      "timestamp": 1789455982597
+    },
+    {
+      "id": "evt_24bb9ea6af582a2f",
+      "projectKey": "pk_live_8ac6b3facd08af30203ca117",
+      "type": "outgoing",
+      "api": "http://localhost:5001/geocode",
+      "method": "GET",
+      "duration": 266,
+      "status": 200,
+      "timestamp": 1789538532852
+    },
+    {
+      "id": "evt_3958ac6a74bccc35",
+      "projectKey": "pk_live_8ac6b3facd08af30203ca117",
+      "type": "incoming",
+      "api": "/api/orders/123/track",
+      "method": "GET",
+      "duration": 312,
+      "status": 200,
+      "timestamp": 1789538532854
+    },
+    {
+      "id": "evt_d7f1a76cbd6c47d5",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "type": "outgoing",
+      "api": "http://localhost:5001/geocode",
+      "method": "GET",
+      "duration": 321,
+      "status": 200,
+      "timestamp": 1789539482581
+    },
+    {
+      "id": "evt_22b52d55553c25bc",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "type": "incoming",
+      "api": "/api/orders/123/track",
+      "method": "GET",
+      "duration": 374,
+      "status": 200,
+      "timestamp": 1789539482583
+    },
+    {
+      "id": "evt_6fa71f3b6d990525",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "type": "outgoing",
+      "api": "http://localhost:5001/geocode",
+      "method": "GET",
+      "duration": 214,
+      "status": 200,
+      "timestamp": 1789539609147
+    },
+    {
+      "id": "evt_56f61ae664b3aeba",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "type": "incoming",
+      "api": "/api/orders/123/track",
+      "method": "GET",
+      "duration": 220,
+      "status": 200,
+      "timestamp": 1789539609148
+    },
+    {
+      "id": "evt_1257606a3faebbf8",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "type": "incoming",
+      "api": "/api/order/123/track",
+      "method": "GET",
+      "duration": 5,
+      "status": 404,
+      "timestamp": 1789539653610
+    }
+  ],
+  "flags": [
+    {
+      "id": "flg_1789455982587_wi3yvx",
+      "projectKey": "pk_live_f9946e349c8c47f9d2dfa193",
+      "severity": "warning",
+      "rule": "insecure_http",
+      "api": "http://legacy.example.com/profile",
+      "message": "Unencrypted call to http://legacy.example.com/profile — use HTTPS instead of HTTP.",
+      "timestamp": 1789455982587
+    },
+    {
+      "id": "flg_1789538532852_5ie03w",
+      "projectKey": "pk_live_8ac6b3facd08af30203ca117",
+      "severity": "warning",
+      "rule": "insecure_http",
+      "api": "http://localhost:5001/geocode",
+      "message": "Unencrypted call to http://localhost:5001/geocode — use HTTPS instead of HTTP.",
+      "timestamp": 1789538532852
+    },
+    {
+      "id": "flg_1789539482581_p2d4t5",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "severity": "warning",
+      "rule": "insecure_http",
+      "api": "http://localhost:5001/geocode",
+      "message": "Unencrypted call to http://localhost:5001/geocode — use HTTPS instead of HTTP.",
+      "timestamp": 1789539482581
+    },
+    {
+      "id": "flg_1789539609147_gdvyo7",
+      "projectKey": "pk_live_a4f8720c04ea4bae78a80ef3",
+      "severity": "warning",
+      "rule": "insecure_http",
+      "api": "http://localhost:5001/geocode",
+      "message": "Unencrypted call to http://localhost:5001/geocode — use HTTPS instead of HTTP.",
+      "timestamp": 1789539609147
+    }
+  ]
+}
