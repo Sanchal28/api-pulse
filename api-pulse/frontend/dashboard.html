@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>API Pulse — Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="left">
+      <div class="brand-mark" style="margin-bottom:0;">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M2 12h4l2-7 4 14 3-10 2 3h5" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>API Pulse</span>
+      </div>
+      <svg class="pulse-strip" viewBox="0 0 220 30" preserveAspectRatio="none">
+        <polyline id="pulseLine" points="" fill="none" stroke="#5EEAD4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="right">
+      <span class="user-chip" id="userChip"></span>
+      <button class="btn-secondary" id="logoutBtn">Sign out</button>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <div class="projects-bar" id="projectsBar">
+      <!-- project chips injected here -->
+      <button class="btn-secondary" id="newProjectBtn">+ New Project</button>
+    </div>
+
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <h2>No projects yet</h2>
+      <p>Create a project to get a Project Key and start seeing traffic here.</p>
+      <br/>
+      <button class="btn-primary" style="width:220px;" id="emptyCreateBtn">+ New Project</button>
+    </div>
+
+    <div id="dashboardContent" style="display:none;">
+
+      <div class="cards-row">
+        <div class="card">
+          <div class="label">Total Calls</div>
+          <div class="value" id="cardTotal">—</div>
+        </div>
+        <div class="card">
+          <div class="label">Avg Latency</div>
+          <div class="value" id="cardLatency">—</div>
+        </div>
+        <div class="card">
+          <div class="label">Success Rate</div>
+          <div class="value success" id="cardSuccess">—</div>
+        </div>
+        <div class="card">
+          <div class="label">Active Flags</div>
+          <div class="value" id="cardFlags">—</div>
+        </div>
+      </div>
+
+      <div class="main-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3><span class="live-dot"></span> Live Feed</h3>
+            <span style="font-size:11px;color:var(--text-faint);font-family:var(--font-mono);">last 50</span>
+          </div>
+          <div class="feed-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>API</th>
+                  <th>Method</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody id="feedBody"></tbody>
+            </table>
+            <div class="empty-panel" id="feedEmpty">Waiting for traffic…</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Security Flags</h3>
+          </div>
+          <div class="flags-scroll" id="flagsList">
+            <div class="empty-panel" id="flagsEmpty">No flags raised. All quiet.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:18px;">
+        <div class="panel-head">
+          <h3>Per-API Summary</h3>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>API</th>
+              <th>Total Calls</th>
+              <th>Avg Latency</th>
+              <th>Success Rate</th>
+            </tr>
+          </thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+        <div class="empty-panel" id="summaryEmpty">No calls recorded yet.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- New project modal -->
+  <div class="modal-backdrop" id="newProjectModal">
+    <div class="modal">
+      <h2>New project</h2>
+      <p class="sub">Give it a name — you'll get a Project Key right away.</p>
+      <label for="projectNameInput">Project name</label>
+      <input type="text" id="projectNameInput" placeholder="My E-commerce Backend" />
+      <div class="error-box" id="projectErrorBox"></div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="cancelProjectBtn">Cancel</button>
+        <button class="btn-primary" style="width:auto;margin-top:0;padding:9px 18px;" id="createProjectBtn">Create project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup snippet modal, shown right after project creation -->
+  <div class="modal-backdrop" id="setupModal">
+    <div class="modal" style="width:560px;">
+      <h2>Project created</h2>
+      <p class="sub">Install the SDK and paste this into your Express app.</p>
+
+      <label>Project key</label>
+      <div class="key-box">
+        <span id="setupKey"></span>
+        <button id="copyKeyBtn">Copy</button>
+      </div>
+
+      <label>1. Install</label>
+      <div class="snippet">npm install apipulse-sdk</div>
+
+      <label>2. Paste near the top of your Express app</label>
+      <div class="snippet" id="setupSnippet"></div>
+
+      <label style="margin-top:16px;">3. Restart your server — that's the entire setup.</label>
+
+      <div class="modal-actions">
+        <button class="btn-primary" style="width:auto;margin-top:0;padding:9px 18px;" id="doneSetupBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
