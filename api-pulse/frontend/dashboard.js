@@ -139,6 +139,8 @@ async function refreshAll() {
     renderSummary(summaryData.summary);
     renderFlags(flagsData.flags);
     updatePulse(feedData.feed);
+    renderTrafficChart(feedData.feed);
+    renderStatusBreakdown(feedData.feed);
   } catch (e) {
     console.error(e);
   }
@@ -235,6 +237,97 @@ function updatePulse(feed) {
     return `${(i * step).toFixed(1)},${y.toFixed(1)}`;
   }).join(' ');
   document.getElementById('pulseLine').setAttribute('points', points);
+}
+
+// ---------------- charts ----------------
+// Buckets the feed (already time-ordered events) into fixed windows so we can
+// draw calls/min + avg latency as lines without asking the backend for anything new.
+function bucketFeed(feed, bucketCount = 12, rangeMs = 6 * 60 * 1000) {
+  const now = Date.now();
+  const start = now - rangeMs;
+  const bucketMs = rangeMs / bucketCount;
+  const buckets = Array.from({ length: bucketCount }, (_, i) => ({
+    count: 0,
+    durationSum: 0,
+    s2xx: 0, s4xx: 0, s5xx: 0,
+  }));
+  feed.forEach((e) => {
+    if (e.timestamp < start) return;
+    const idx = Math.min(bucketCount - 1, Math.max(0, Math.floor((e.timestamp - start) / bucketMs)));
+    const b = buckets[idx];
+    b.count++;
+    b.durationSum += e.duration;
+    if (e.status >= 500) b.s5xx++;
+    else if (e.status >= 400) b.s4xx++;
+    else b.s2xx++;
+  });
+  return buckets.map((b) => ({ ...b, avgDuration: b.count ? Math.round(b.durationSum / b.count) : 0 }));
+}
+
+function renderTrafficChart(feed) {
+  const svg = document.getElementById('trafficChart');
+  const empty = document.getElementById('chartEmpty');
+  const buckets = bucketFeed(feed);
+  const hasData = buckets.some((b) => b.count > 0);
+
+  if (!hasData) {
+    svg.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  const W = 760, H = 160, PAD = 10;
+  const maxCalls = Math.max(1, ...buckets.map((b) => b.count));
+  const maxLatency = Math.max(1, ...buckets.map((b) => b.avgDuration));
+  const step = (W - PAD * 2) / Math.max(1, buckets.length - 1);
+
+  const toPoints = (values, max) => values.map((v, i) => {
+    const x = PAD + i * step;
+    const y = H - PAD - (v / max) * (H - PAD * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+
+  const callsPoints = toPoints(buckets.map((b) => b.count), maxCalls);
+  const latencyPoints = toPoints(buckets.map((b) => b.avgDuration), maxLatency);
+
+  let grid = '';
+  for (let i = 1; i < 4; i++) {
+    const y = (PAD + (i * (H - PAD * 2)) / 4).toFixed(1);
+    grid += `<line x1="${PAD}" y1="${y}" x2="${W - PAD}" y2="${y}" stroke="#242A32" stroke-width="1" />`;
+  }
+
+  svg.innerHTML = `
+    ${grid}
+    <polyline points="${callsPoints}" fill="none" stroke="#5EEAD4" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+    <polyline points="${latencyPoints}" fill="none" stroke="#FBBF24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="5 4" />
+  `;
+}
+
+function renderStatusBreakdown(feed) {
+  const wrap = document.getElementById('statusBreakdown');
+  const total = feed.length;
+  if (!total) {
+    wrap.innerHTML = '<div class="empty-panel" style="padding:0;">No calls recorded yet.</div>';
+    return;
+  }
+  const s2xx = feed.filter((e) => e.status < 400).length;
+  const s4xx = feed.filter((e) => e.status >= 400 && e.status < 500).length;
+  const s5xx = feed.filter((e) => e.status >= 500).length;
+  const pct = (n) => Math.round((n / total) * 100);
+
+  wrap.innerHTML = `
+    <div class="status-bar">
+      ${s2xx ? `<div class="seg s2xx" style="width:${pct(s2xx)}%"></div>` : ''}
+      ${s4xx ? `<div class="seg s4xx" style="width:${pct(s4xx)}%"></div>` : ''}
+      ${s5xx ? `<div class="seg s5xx" style="width:${pct(s5xx)}%"></div>` : ''}
+    </div>
+    <div class="status-legend">
+      <span><i class="s2xx"></i> 2xx/3xx — ${s2xx} (${pct(s2xx)}%)</span>
+      <span><i class="s4xx"></i> 4xx — ${s4xx} (${pct(s4xx)}%)</span>
+      <span><i class="s5xx"></i> 5xx — ${s5xx} (${pct(s5xx)}%)</span>
+    </div>
+  `;
 }
 
 function escapeHtml(str) {
